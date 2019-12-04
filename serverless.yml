@@ -1,0 +1,51 @@
+service: multi-platform-chatbot
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: us-east-2
+  stackName: multi-platform-chatbot
+  apiName: multi-platform-chatbot
+
+layers:
+  crawler:
+    name: Crawler
+    path: ./lambda_layers
+
+functions:
+  aws_news:
+    handler: aws.news
+    name: crawler-aws-news
+    description: Get AWS newest news in JSON format
+    memorySize: 128
+    events:
+      - http:
+          path: /aws
+          method: post
+
+  ithome_news:
+    handler: ithome.news
+    name: crawler-ithome-news
+    description: Get ithome newest news in JSON format
+    memorySize: 128
+    events:
+      - http:
+          path: /ithome
+          method: post
+    layers:
+      - {Ref: CrawlerLambdaLayer}
+
+  inside_news:
+    handler: inside.news
+    name: crawler-inside-news
+    description: Get inside newest news in JSON format
+    memorySize: 128
+    events:
+      - http:
+          path: /inside
+          method: post
+    layers:
+      - {Ref: CrawlerLambdaLayer}
+
+plugins:
+  - serverless-step-functions
