@@ -14,7 +14,7 @@ layers:
 
 functions:
   aws_news:
-    handler: aws.news
+    handler: crawler.aws.news
     name: crawler-aws-news
     description: Get AWS newest news in JSON format
     memorySize: 128
@@ -24,7 +24,7 @@ functions:
           method: post
 
   ithome_news:
-    handler: ithome.news
+    handler: crawler.ithome.news
     name: crawler-ithome-news
     description: Get ithome newest news in JSON format
     memorySize: 128
@@ -36,7 +36,7 @@ functions:
       - {Ref: CrawlerLambdaLayer}
 
   inside_news:
-    handler: inside.news
+    handler: crawler.inside.news
     name: crawler-inside-news
     description: Get inside newest news in JSON format
     memorySize: 128
