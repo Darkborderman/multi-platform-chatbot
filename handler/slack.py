@@ -1,18 +1,19 @@
+import random
+import json
 from parser.slack import SlackParser
+from formatter.slack import slack_formatter
+from data.eat import EAT_LIST
 from crawler.aws import news
 
 def handler(event, context):
-    # TODO implement
     print(event)
     data = SlackParser().parse(event)
-    # print(event['body'])
-    args = event['body'].split('&')
-    request_args={}
-    for arg in args:
-        key,value = arg.split('=')
-        request_args[key]= value.replace('%2','')
-    print(request_args)
+    print(data)
+    response = {}
+    if data['command'][0] == '/eat':
+        eat = random.choice(EAT_LIST)
+        response = slack_formatter(eat)
     return {
         'statusCode': 200,
-        'body': 'OK'
+        'body': json.dumps(response)
     }

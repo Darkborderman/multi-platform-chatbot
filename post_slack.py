@@ -7,7 +7,5 @@ requests.post(
     headers={
         'Content-Type':'Application/json'
     },
-    data=json.dumps({
-        'text':'hello world'
-    })
+    data=json.dumps({})
 )
