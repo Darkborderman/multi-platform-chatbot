@@ -1,8 +1,10 @@
+from parser.slack import SlackParser
 from crawler.aws import news
 
 def handler(event, context):
     # TODO implement
     print(event)
+    data = SlackParser().parse(event)
     # print(event['body'])
     args = event['body'].split('&')
     request_args={}
@@ -12,5 +14,5 @@ def handler(event, context):
     print(request_args)
     return {
         'statusCode': 200,
-        'body': ''
+        'body': 'OK'
     }
