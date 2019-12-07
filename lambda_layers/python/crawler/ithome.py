@@ -1,6 +1,6 @@
 import json
 from botocore.vendored import requests
-from shared import BeautifulSoup
+from python.shared import BeautifulSoup
 
 
 def news(event, context):

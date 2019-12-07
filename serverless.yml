@@ -14,38 +14,17 @@ layers:
 
 functions:
   aws_news:
-    handler: crawler.aws.news
-    name: crawler-aws-news
-    description: Get AWS newest news in JSON format
+    handler: handler.slack.handler
+    name: handler-slack
+    description: Slack command handler
     memorySize: 128
     events:
       - http:
-          path: /aws
-          method: post
-
-  ithome_news:
-    handler: crawler.ithome.news
-    name: crawler-ithome-news
-    description: Get ithome newest news in JSON format
-    memorySize: 128
-    events:
-      - http:
-          path: /ithome
+          path: /slack
           method: post
     layers:
       - {Ref: CrawlerLambdaLayer}
 
-  inside_news:
-    handler: crawler.inside.news
-    name: crawler-inside-news
-    description: Get inside newest news in JSON format
-    memorySize: 128
-    events:
-      - http:
-          path: /inside
-          method: post
-    layers:
-      - {Ref: CrawlerLambdaLayer}
-
-plugins:
-  - serverless-step-functions
+package:
+  exclude:
+    - node_modules/**
