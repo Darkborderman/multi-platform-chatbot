@@ -1,9 +1,9 @@
 import random
 import json
-from parser.slack import SlackParser
-from formatter.slack import slack_formatter
-from crawler.aws import news
-from data.eat import EAT_LIST
+from api.parser.slack import SlackParser
+from api.formatter.slack import slack_formatter
+from api.crawler.aws import news
+from api.data.eat import EAT_LIST
 
 def handler(event, context):
     print(event)
