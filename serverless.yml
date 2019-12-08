@@ -14,7 +14,7 @@ layers:
 
 functions:
   aws_news:
-    handler: handler.slack.handler
+    handler: api.slack.handler
     name: handler-slack
     description: Slack command handler
     memorySize: 128
