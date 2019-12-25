@@ -1,8 +1,8 @@
 def slack_formatter(data:dict):
     
     return {
-        "text": f"*{data['title']}*\n {data['description']}\n {data['URL']}",
-        "mrkdwn": True
+        'text': f'*{data["title"]}*\n {data["description"]}\n {data["URL"]}',
+        'mrkdwn': True
     }
 
 def slack_test_formatter(data:dict):
@@ -18,27 +18,27 @@ def slack_test_formatter(data:dict):
         description = data['description']
     
     return {
-        "blocks": [
+        'blocks': [
             {
-                "type": "section",
-                "text": {
-                    "type": "mrkdwn",
-                    "text": text
+                'type': 'section',
+                'text': {
+                    'type': 'mrkdwn',
+                    'text': text
                 },
-                "accessory": {
-                    "type": "button",
-                    "text": {
-                        "type": "plain_text",
-                        "text": "Show answer"
+                'accessory': {
+                    'type': 'button',
+                    'text': {
+                        'type': 'plain_text',
+                        'text': 'Show answer'
                     },
-                    "confirm":{
-                        "title":{
-                            "type":"plain_text",
-                            "text": 'Answer is ' + str(data['answer'])
+                    'confirm':{
+                        'title':{
+                            'type':'plain_text',
+                            'text': 'Answer is ' + data['answer']
                         },
-                        "text":{
-                            "type":"plain_text",
-                            "text": description
+                        'text':{
+                            'type':'plain_text',
+                            'text': description
                         }
                     }
                 }

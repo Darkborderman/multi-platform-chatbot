@@ -7,7 +7,7 @@ TEST_LIST = [
             'A special variable, which can hold more than one value at a time',
             'The ability for a system to remain in operation even if some of the components used to build the system fail',
         ],
-        "answer": 4,
+        "answer": '4',
         "description": ''
     }
 ]
