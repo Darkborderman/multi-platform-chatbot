@@ -39,6 +39,10 @@ def slack_test_formatter(data: dict):
                         'text':{
                             'type':'plain_text',
                             'text': description
+                        },
+                        'confirm':{
+                           'type':'plain_text',
+                            'text':'Okay, burn it'
                         }
                     }
                 }

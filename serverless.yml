@@ -1,11 +1,11 @@
-service: multi-platform-chatbot
+service: multi-platform-chatbot2
 
 provider:
   name: aws
   runtime: python3.7
   region: us-east-2
-  stackName: multi-platform-chatbot
-  apiName: multi-platform-chatbot
+  stackName: multi-platform-chatbot2
+  apiName: multi-platform-chatbot2
 
 layers:
   crawler:
@@ -13,7 +13,7 @@ layers:
     path: ./lambda_layers
 
 functions:
-  aws_news:
+  slack_handler:
     handler: api.slack.handler
     name: handler-slack
     description: Slack command handler
@@ -24,7 +24,16 @@ functions:
           method: post
     layers:
       - {Ref: CrawlerLambdaLayer}
-
+      
+  slack_action:
+    handler: api.slack_action.handler
+    name: handler-slack-action
+    description: Slack action handler
+    memorySize: 128
+    events:
+      - http:
+          path: /slack-action
+          method: post
 package:
   exclude:
     - node_modules/**
