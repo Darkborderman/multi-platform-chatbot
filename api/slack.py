@@ -10,14 +10,14 @@ def handler(event, context):
     data = SlackParser().parse(event)
     print(data)
     response = {}
-    if data['command'][0] == '/eat':
+    if data['command'] == '/eat':
         eat = random.choice(EAT_LIST)
         response = slack_formatter(eat)
         return {
             'statusCode': 200,
             'body': json.dumps(response)
         }
-    if data['command'][0] == '/test':
+    if data['command'] == '/test':
 
         test = random.choice(TEST_LIST)
         text = test['problem'] + '\n'
