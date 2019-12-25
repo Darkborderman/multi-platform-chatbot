@@ -1,11 +1,11 @@
-def slack_formatter(data:dict):
-    
+def slack_formatter(data: dict):
+
     return {
         'text': f'*{data["title"]}*\n {data["description"]}\n {data["URL"]}',
         'mrkdwn': True
     }
 
-def slack_test_formatter(data:dict):
+def slack_test_formatter(data: dict):
     text = data['problem'] + '\n'
     description = 'No description'
     counter = 1
@@ -16,7 +16,7 @@ def slack_test_formatter(data:dict):
 
     if data['description']:
         description = data['description']
-    
+
     return {
         'blocks': [
             {

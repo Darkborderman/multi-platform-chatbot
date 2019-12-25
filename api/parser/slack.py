@@ -3,7 +3,7 @@ import urllib.parse
 
 class SlackParser():
     data = {}
-    def parse(self, event:dict):
+    def parse(self, event: dict):
         # parse out messages
         self.data = urllib.parse.parse_qs(event['body'])
         # format
