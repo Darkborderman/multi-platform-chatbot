@@ -1,9 +1,10 @@
 import random
 import json
 from api.parser.slack import SlackParser
-from api.formatter.slack import slack_formatter
+from api.formatter.slack import slack_formatter, slack_test_formatter
 from api.crawler.aws import news
-from api.data.eat import EAT_LIST, TEST_LIST
+from api.data.eat import EAT_LIST
+from api.data.test import TEST_LIST
 
 def handler(event, context):
     print(event)
@@ -20,45 +21,8 @@ def handler(event, context):
     if data['command'] == '/test':
 
         test = random.choice(TEST_LIST)
-        text = test['problem'] + '\n'
-        description = 'No description'
-        counter = 1
-
-        for item in test['choices']:
-            text = text + str(counter) + '. ' + item + '\n'
-            counter = counter + 1
-
-        if test['description']:
-            description = test['description']
-
+        response = slack_test_formatter(test)
         return {
             'statusCode': 200,
-            'body': json.dumps({
-                "blocks": [
-                    {
-                        "type": "section",
-                        "text": {
-                            "type": "mrkdwn",
-                            "text": text
-                        },
-                        "accessory": {
-                            "type": "button",
-                            "text": {
-                                "type": "plain_text",
-                                "text": "Show answer"
-                            },
-                            "confirm":{
-                                "title":{
-                                    "type":"plain_text",
-                                    "text": 'Answer is ' + str(test['answer'])
-                                },
-                                "text":{
-                                    "type":"plain_text",
-                                    "text": description
-                                }
-                            }
-                        }
-                    }
-                ]
-            })
+            'body': json.dumps(response)
         }
