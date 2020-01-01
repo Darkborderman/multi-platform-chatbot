@@ -6,16 +6,23 @@ def slack_formatter(data: dict):
     }
 
 def slack_test_formatter(data: dict):
+    # append question text
     text = data['problem'] + '\n'
-    description = 'No description'
     counter = 1
-
-    for item in data['choices']:
+    for item in data['options']:
         text = text + str(counter) + '. ' + item + '\n'
         counter = counter + 1
 
-    if data['description']:
-        description = data['description']
+    # append result
+    answer = 'Answer is '
+    for item in data['answers']:
+        answer = answer + item + ' '
+
+    description = ''
+    if not data['description']:
+        description += 'No description'
+    else:
+        description += data['description']
 
     return {
         'blocks': [
@@ -34,7 +41,7 @@ def slack_test_formatter(data: dict):
                     'confirm':{
                         'title':{
                             'type':'plain_text',
-                            'text': 'Answer is ' + data['answer']
+                            'text': answer
                         },
                         'text':{
                             'type':'plain_text',
